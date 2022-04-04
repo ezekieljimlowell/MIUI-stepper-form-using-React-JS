@@ -1,0 +1,29 @@
+.addPadding{
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.addPaddingButton {
+    padding: 15px 20px 15px 20px;
+}
+
+.addWidth {
+    width: 100%;
+}
+
+.addPaddingPrev {
+    padding: 15px 20px 3px 20px;
+}
+
+.addPaddingNext {
+    padding: 3px 20px 15px 20px;
+}
+
+.title {
+    padding: 10px;
+}
+
+.prevButtonWidth {
+    width: 100px;
+    justify-items: center;
+}
