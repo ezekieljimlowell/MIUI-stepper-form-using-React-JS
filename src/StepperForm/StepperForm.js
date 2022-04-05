@@ -6,60 +6,37 @@ import { EducationalDetails } from "../Forms/EducationalDetails";
 import { Success } from "../Forms/Success";
 
 export const StepperForm = () => {
-    const [stepperState, setStepperState] = useState({
-        //basic details
-        fullName: "",
-        age: "",
-        place: "",
-        dateOfBirth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-        //contact
-        email: "",
-        phoneNumber: "",
-        alternateNumber: "",
-        address: "",
-        //education
-        SSLC_percentage: "",
-        HSC_percentage: "",
-        UG_mark_percentage: "",
-        yearOfCompletion: "",
-        //personal
+    const [personalDetails, setPersonalDetails] = useState({
         PAN_number: "",
         UAN_number: "",
         totalExperience: "",
         department: ""
     })
+    const [basicDetails, setBasicDetails] = useState({
+        fullName: "",
+        age: "",
+        place: "",
+        dateOfBirth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+    })
+    const [contactDetails, setContactDetails] = useState({
+        email: "",
+        phoneNumber: "",
+        alternateNumber: "",
+        address: "",
+    })
+    const [educationalDetails, setEducationalDetails] = useState({
+        SSLC_percentage: "",
+        HSC_percentage: "",
+        UG_mark_percentage: "",
+        yearOfCompletion: "",
+    })
     const [step, setStep] = useState(1);
 
-    const { fullName, age, place, dateOfBirth,
-        email, phoneNumber, alternateNumber, address,
-        SSLC_percentage, HSC_percentage, UG_mark_percentage,
-        yearOfCompletion, PAN_number, UAN_number,
-        totalExperience, department } = stepperState;
-    const values = {
-        fullName, age, place, dateOfBirth,
-        email, phoneNumber, alternateNumber, address,
-        SSLC_percentage, HSC_percentage, UG_mark_percentage,
-        yearOfCompletion, PAN_number, UAN_number,
-        totalExperience, department
-    }
-
-    const handleChange = input => e => {
-        setStepperState({
-            [input]: e.target.value
-        })
-    }
-
     const prevState = () => {
-        /*setStepperState({
-            step: step - 1
-        })*/
         setStep(step - 1);
     }
 
     const nextState = () => {
-        /*setStepperState({
-            step: step + 1
-        })*/
         setStep(step + 1);
     }
 
@@ -70,13 +47,12 @@ export const StepperForm = () => {
 
                     switch (step) {
                         case 1:
-                            console.log(step)
+                            //console.log(step)
                             return (
                                 <div>
                                     <BasicDetails
                                         nextState={nextState}
-                                        handleChange={handleChange}
-                                        values={values}
+                                        setBasicDetails={setBasicDetails}
                                     />
                                 </div>
                             )
@@ -85,33 +61,34 @@ export const StepperForm = () => {
                                 <ContactForm
                                     nextState={nextState}
                                     prevState={prevState}
-                                    handleChange={handleChange}
-                                    values={values}
+                                    contactDetails={contactDetails}
+                                    setContactDetails={setContactDetails}
                                 />
                             )
                         case 3:
                             return (
                                 <EducationalDetails
+                                    setEducationalDetails={setEducationalDetails}
                                     nextState={nextState}
                                     prevState={prevState}
-                                    handleChange={handleChange}
-                                    values={values}
                                 />
                             )
                         case 4:
                             return (
                                 <PersonalDetails
+                                    setPersonalDetails={setPersonalDetails}
                                     nextState={nextState}
                                     prevState={prevState}
-                                    handleChange={handleChange}
-                                    values={values}
                                 />
                             )
                         case 5:
                             return (
                                 <Success
+                                    basicDetails={basicDetails}
+                                    contactDetails={contactDetails}
+                                    educationalDetails={educationalDetails}
+                                    personalDetails={personalDetails}
                                     prevState={prevState}
-                                    values={values}
                                 />
                             )
                     }

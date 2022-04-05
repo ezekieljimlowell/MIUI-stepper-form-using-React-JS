@@ -2,13 +2,27 @@ import { AppBar, Dialog, TextField } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { Button } from "@mui/material";
 import styles from './CommonStyles.module.css';
+import { useState } from "react";
 
 export const BasicDetails = (props) => {
-    const { values, handleChange, nextState } = props;
+    const { nextState, setBasicDetails } = props;
+    const [data, setData] = useState({});
+
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const goToNext = (e) => {
         e.preventDefault();
         nextState();
+        setBasicDetails({
+            fullName: data.fullName,
+            age: data.age,
+            place: data.place
+        })
     }
 
     return (
@@ -25,10 +39,11 @@ export const BasicDetails = (props) => {
                             variant="standard"
                             placeholder="Enter your name"
                             label="Full name"
-                            onChange={handleChange("fullName")}
-                            value={values.fullName}
+                            onChange={handleChange}
+                            value={data.fullName ? data.fullName: ""}
                             margin="normal"
                             fullWidth
+                            name="fullName"
                         />
                     </div>
                     <div className={styles.addPadding}>
@@ -36,10 +51,11 @@ export const BasicDetails = (props) => {
                             variant="standard"
                             placeholder="Age"
                             label="Age"
-                            onChange={handleChange("age")}
-                            value={values.age}
+                            onChange={handleChange}
+                            value={data.age ? data.age: ""}
                             margin="normal"
                             fullWidth
+                            name="age"
                         />
                     </div>
                     <div className={styles.addPadding}>
@@ -47,10 +63,11 @@ export const BasicDetails = (props) => {
                             variant="standard"
                             placeholder="Place"
                             label="Place"
-                            onChange={handleChange("place")}
-                            value={values.place}
+                            onChange={handleChange}
+                            value={data.place ? data.place: ""}
                             margin="normal"
                             fullWidth
+                            name="place"
                         />
                     </div>
                     <div className={styles.addPaddingButton}>
